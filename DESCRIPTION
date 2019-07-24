@@ -1,0 +1,27 @@
+Package: stanglogitMer
+Type: Package
+Title: Bayesian Hierarchical Generalized-Logit Model to study behavioural peripersonal space as a continuum
+Version: 0.1.0
+Authors@R: as.person(c(
+    "Michele Scandola <michele.scandola@univr.it> [aut, cre]", 
+    "Marzia Zanini [aut]"
+  ))
+Depends: R (>= 3.5.1), rstan
+Description: This package fits Bayesian Hierarchical Generalised-Logit models.
+    These models are particularly useful to study the behavioural peripersonal space
+    as a continuum, by the estimation of the boudary and the stepness of the
+    peripersonal space boundary.
+License: What license is it under?
+Imports: coda
+Suggests:
+    ggplot2,
+    reshape2,
+    bayesplot,
+    gridExtra,
+    loo,
+    mcmcse,
+    bridgesampling,
+    testthat
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
