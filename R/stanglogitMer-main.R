@@ -94,12 +94,12 @@ stanglogitMer = function(dependent,
     real k[Nobs];                               //maximum for subject
     real dist[Nobs];                            //the distances of the experiment
   }
+  transformed data{
+    real standard_deviation = sd(y);
+  }
   parameters {
     vector[NpredsG] growth;               // growth predictor parameters
     vector[NpredsS] shift;                // shift predictor parameters
-    real<lower=0> sigma_e;                // error sd
-    real<lower=0> sigma_g;                // growth sd
-    real<lower=0> sigma_s;                // shift sd
     vector<lower=0>[Nrands] sigma_u;      // random effects sd
     cholesky_factor_corr[Nrands] L_Omega;
     matrix[Nrands,Ngroup] z_u;
@@ -126,22 +126,20 @@ stanglogitMer = function(dependent,
     target += lkj_corr_cholesky_lpdf(L_Omega | 1);
     target += normal_lpdf(to_vector(z_u) | 0, 1);
 
-    target += cauchy_lpdf(sigma_e | 0, 10);
-    target += cauchy_lpdf(sigma_g | 0, 10);
-    target += cauchy_lpdf(sigma_s | 0, 10);
-
-    target += cauchy_lpdf(growth | 0, sigma_g);
-    target += cauchy_lpdf(shift  | 0, sigma_s);
+    target += cauchy_lpdf(growth | 0, standard_deviation);
+    target += cauchy_lpdf(shift  | 0, standard_deviation);
 
     //likelihood
-    target += normal_lpdf(y | mu, sigma_e);
+    target += cauchy_lpdf(y | mu, standard_deviation/4);
   }
   generated quantities {
-  vector[Nobs] log_lik;
+    vector[Nobs] log_lik;
+    real y_rep[Nobs];
     corr_matrix[Nrands] Cor_1 = multiply_lower_tri_self_transpose(L_Omega);
 
     for (n in 1:Nobs){
-      log_lik[n] = normal_lpdf(y[n]| mu[n], sigma_e);
+      log_lik[n] = cauchy_lpdf(y[n]| mu[n], standard_deviation/4);
+      y_rep[n] = cauchy_rng(mu[n], standard_deviation/4);
     }
   }
   "

@@ -71,9 +71,9 @@ summary.stanglogitFit = function(object){
 
   sum.gbeta = testProblem(summary(object[[2]],pars="growth"))
   sum.sbeta = testProblem(summary(object[[2]],pars="shift"))
-  sum.gsd   = testProblem(summary(object[[2]],pars="sigma_g"))
-  sum.ssd   = testProblem(summary(object[[2]],pars="sigma_s"))
-  sum.esd   = testProblem(summary(object[[2]],pars="sigma_e"))
+  # sum.gsd   = testProblem(summary(object[[2]],pars="sigma_g"))
+  # sum.ssd   = testProblem(summary(object[[2]],pars="sigma_s"))
+  # sum.esd   = testProblem(summary(object[[2]],pars="sigma_e"))
   sum.rand  = testProblem(summary(object[[2]],pars="sigma_u"))
   sum.rcor  = testProblem(summary(object[[2]],pars="Cor_1"))
 
@@ -91,10 +91,10 @@ summary.stanglogitFit = function(object){
       "Formula Shift FE"  = paste(dep.name,mypaste(object[[5]])),
       "RE" = as.character(object[[6]]),
       "Growth parameters" = sum.gbeta,
-      "Growth variances"  = sum.gsd,
+      # "Growth variances"  = sum.gsd,
       "Shift parameters"  = sum.sbeta,
-      "Shift variances"   = sum.ssd,
-      "Error parameter"   = sum.esd,
+      # "Shift variances"   = sum.ssd,
+      # "Error parameter"   = sum.esd,
       "Random parameters" = sum.rand,
       "Random cor"        = sum.rcor,
       "WAIC"              = out_waic,
@@ -118,20 +118,18 @@ print.summary.stanglogitFit = function(object,digits=4){
 
   cat("\n\nFIXED EFFECTS OR POPULATION-LEVEL EFFECTS\n\n")
 
-  cat("   Sigma: \n\n")
-  print(object$`Error parameter`$summary,digits=digits)
+  # cat("   Sigma: \n\n")
+  # print(object$`Error parameter`$summary,digits=digits)
 
   cat("\n\n   Formula for growth parameters: ", object$`Formula Growth FE`,"\n\n")
 
   cat("   Growth parameters:\n\n")
-  print(rbind(object$`Growth parameters`$summary,
-              object$`Growth variances`$summary),digits=digits)
+  print(object$`Growth parameters`$summary,digits=digits)
 
   cat("\n\n   Formula for shift parameters: ", object$`Formula Shift FE`,"\n\n")
 
   cat("   Shift parameters:\n\n")
-  print(rbind(object$`Shift parameters`$summary,
-                object$`Shift variances`$summary),digits=digits)
+  print(object$`Shift parameters`$summary,digits=digits)
 
   cat("\n\nRANDOM EFFECTS OR GROUP-LEVEL EFFECTS\n\n")
 

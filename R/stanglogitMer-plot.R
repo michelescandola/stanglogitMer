@@ -61,15 +61,25 @@ plot_sigmoid = function(object,CI=0.95){
 
   tmp0$divide = paste("Growth:",as.character(tmp0$factgrowth),"\nShift:",as.character(tmp0$factshift))
 
-  tmp0$y0 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s2)
-  tmp0$y1 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s1)
-  tmp0$y2 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s3)
-  tmp0$y3 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s2)
-  tmp0$y4 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s3)
-  tmp0$y5 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s1)
-  tmp0$y6 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s3)
-  tmp0$y7 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s1)
-  tmp0$y8 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s2)
+  # tmp0$y0 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s2)
+  # tmp0$y1 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s1)
+  # tmp0$y2 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s3)
+  # tmp0$y3 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s2)
+  # tmp0$y4 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s3)
+  # tmp0$y5 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s1)
+  # tmp0$y6 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s3)
+  # tmp0$y7 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s1)
+  # tmp0$y8 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s2)
+
+  tmp0$y0 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s2)
+  tmp0$y1 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s1)
+  tmp0$y2 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s3)
+  tmp0$y3 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s2)
+  tmp0$y4 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s3)
+  tmp0$y5 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s1)
+  tmp0$y6 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s3)
+  tmp0$y7 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s1)
+  tmp0$y8 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s2)
 
   N = round(sqrt(length(unique(tmp0$divide))))
 
@@ -177,15 +187,25 @@ plot_gaussian = function(object,CI=0.95){
 
   tmp0$divide = paste("Growth:",as.character(tmp0$factgrowth),"\nShift:",as.character(tmp0$factshift))
 
-  tmp0$y0 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g2, mean=tmp0$s2)
-  tmp0$y1 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g1, mean=tmp0$s1)
-  tmp0$y2 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g3, mean=tmp0$s3)
-  tmp0$y3 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g1, mean=tmp0$s2)
-  tmp0$y4 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g1, mean=tmp0$s3)
-  tmp0$y5 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g2, mean=tmp0$s1)
-  tmp0$y6 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g2, mean=tmp0$s3)
-  tmp0$y7 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g3, mean=tmp0$s1)
-  tmp0$y8 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g3, mean=tmp0$s2)
+  # tmp0$y0 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g2, mean=tmp0$s2)
+  # tmp0$y1 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g1, mean=tmp0$s1)
+  # tmp0$y2 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g3, mean=tmp0$s3)
+  # tmp0$y3 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g1, mean=tmp0$s2)
+  # tmp0$y4 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g1, mean=tmp0$s3)
+  # tmp0$y5 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g2, mean=tmp0$s1)
+  # tmp0$y6 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g2, mean=tmp0$s3)
+  # tmp0$y7 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g3, mean=tmp0$s1)
+  # tmp0$y8 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g3, mean=tmp0$s2)
+
+  tmp0$y0 = dnorm(x=tmp0$distance,sd=1/tmp0$g2, mean=tmp0$s2)
+  tmp0$y1 = dnorm(x=tmp0$distance,sd=1/tmp0$g1, mean=tmp0$s1)
+  tmp0$y2 = dnorm(x=tmp0$distance,sd=1/tmp0$g3, mean=tmp0$s3)
+  tmp0$y3 = dnorm(x=tmp0$distance,sd=1/tmp0$g1, mean=tmp0$s2)
+  tmp0$y4 = dnorm(x=tmp0$distance,sd=1/tmp0$g1, mean=tmp0$s3)
+  tmp0$y5 = dnorm(x=tmp0$distance,sd=1/tmp0$g2, mean=tmp0$s1)
+  tmp0$y6 = dnorm(x=tmp0$distance,sd=1/tmp0$g2, mean=tmp0$s3)
+  tmp0$y7 = dnorm(x=tmp0$distance,sd=1/tmp0$g3, mean=tmp0$s1)
+  tmp0$y8 = dnorm(x=tmp0$distance,sd=1/tmp0$g3, mean=tmp0$s2)
 
   N = round(sqrt(length(unique(tmp0$divide))))
 
@@ -492,4 +512,122 @@ plot.stanglogitFit = function(object,pars=NULL,type="combo",...){
 
   return(ans)
 
+}
+
+#' pp_check for stanglogitFit objects
+#'
+#' \code{plot_sigmoid()} plots the resulting generalised logit curves from the posterior distributions of the model.
+#' For each combination of population-level factors for the Growth and Shift parameters, 9 curves will be plotted.
+#' One curve will come from the median value of the posterior distributions of the Growth and Shift parameters,
+#' the other eight parameters will be obtained by the combination of the boundaries of the Credible
+#' Interval for the Growth and Shift parameters. The dimension of the Credible Interval can be
+#' set by means of the \code{CI} parameter.
+#'
+#' A sigmoid function can be seen as a cumulative gaussian function. In order to plot the gaussian curves,
+#' use \code{plot_gaussian()}.
+#'
+#' @param object a stanglogitFit object
+#' @param CI the dimension of the credible interval taken into account. Default 0.95.
+#' @return a ggplot2 object or a base-R plot
+#' @seealso \code{\link{plot_gaussian}}
+#' @export
+
+pp_check = function(object,type="dens"){
+
+  y_rep = extract(object[[2]], pars = "y_rep")
+
+  y     = object[[3]]
+
+  ans=list()
+
+  if (requireNamespace("bayesplot", quietly = TRUE)) {
+    if(type=="hist"){
+       ans = ppc_hist(y, y_rep[[1]][1:8, ])+xlim(c(-sd(y)*3,sd(y)*3))
+    }else if(type=="mean"){
+       ans = ppc_stat(y = y, yrep = y_rep[[1]], stat = "mean")+xlim(c(-sd(y)*3,sd(y)*3))
+    }else{
+       ans = ppc_dens_overlay(y, y_rep[[1]][1:200, ])+xlim(c(-sd(y)*3,sd(y)*3))
+    }
+  }else if (requireNamespace("ggplot2", quietly = TRUE)){
+    if(type=="hist"){
+      nn  = ncol(y_rep[[1]])
+      tmp = data.frame(
+        y = c(y,y_rep[[1]][1,],y_rep[[1]][2,],y_rep[[1]][3,],y_rep[[1]][4,],y_rep[[1]][5,],y_rep[[1]][6,],y_rep[[1]][7,],y_rep[[1]][8,]),
+        f = rep(c("y","yrep"),c(length(y),nn*8)),
+        c = rep(0:8,c(length(y),nn,nn,nn,nn,nn,nn,nn,nn))
+      )
+      nnn = length(unique(tmp$c))
+
+      ans = ggplot(tmp,aes(x=y,fill=f))+
+        geom_histogram()+
+        facet_wrap(~c,ncol = round(sqrt(nnn)))+
+        xlim(c(-sd(y)*3,sd(y)*3))+ylab("")+theme(legend.title = element_blank())
+    }else if(type=="mean"){
+      ym = mean(y)
+      yr = data.frame(apply(y_rep[[1]],1,mean))
+
+      ans = ggplot(tmp,aes(x=y))+
+        geom_histogram()+
+        xlim(c(-sd(y)*3,sd(y)*3))+ylab("")+theme(legend.title = element_blank())+
+        geom_vline(xintercept = ym,size=2)+xlab("")
+    }else{
+      nn  = ncol(y_rep[[1]])
+      tmp = data.frame(
+        y = c(y,y_rep[[1]][1,],y_rep[[1]][2,],y_rep[[1]][3,],y_rep[[1]][4,],y_rep[[1]][5,],y_rep[[1]][6,],y_rep[[1]][7,],y_rep[[1]][8,]),
+        f = rep(c("y","yrep"),c(length(y),nn*8)),
+        c = rep(0:8,c(length(y),nn,nn,nn,nn,nn,nn,nn,nn))
+      )
+
+      ans = ggplot(tmp,aes(x=y,colour=f,group=c))+
+        geom_density()+
+        xlim(c(-sd(y)*3,sd(y)*3))+ylab("")+theme(legend.title = element_blank())
+    }
+  }else{
+    if(type=="hist"){
+      nn  = ncol(y_rep[[1]])
+      tmp = data.frame(
+        y = c(y,y_rep[[1]][1,],y_rep[[1]][2,],y_rep[[1]][3,],y_rep[[1]][4,],y_rep[[1]][5,],y_rep[[1]][6,],y_rep[[1]][7,],y_rep[[1]][8,]),
+        f = rep(c("y","yrep"),c(length(y),nn*8)),
+        c = rep(0:8,c(length(y),nn,nn,nn,nn,nn,nn,nn,nn))
+      )
+      nnn = length(unique(tmp$c))
+
+      old.par = par(no.readonly = TRUE)
+
+      par(mfrow=c(round(sqrt(nnn)),round(sqrt(nnn))))
+
+      for(cc in unique(tmp$c)){
+        hist(x=tmp$y[tmp$c==cc],main=tmp$f[tmp$c==cc][1],xlab="",xlim=c(-sd(y)*3,sd(y)*3),breaks=round(diff(range(tmp$y[tmp$c==cc]))/50))
+      }
+
+      par(old.par)
+
+      ans = ggplot(tmp,aes(x=y,fill=f))+
+        geom_histogram()+
+        facet_wrap(~c,ncol = round(sqrt(nnn)))+
+        xlim(c(-sd(y)*3,sd(y)*3))+ylab("")+theme(legend.title = element_blank())
+    }else if(type=="mean"){
+      ym = mean(y)
+      yr = data.frame(apply(y_rep[[1]],1,mean))
+
+      ans = ggplot(tmp,aes(x=y))+
+        geom_histogram()+
+        xlim(c(-sd(y)*3,sd(y)*3))+ylab("")+theme(legend.title = element_blank())+
+        geom_vline(xintercept = ym,size=2)+xlab("")
+    }else{
+      nn  = ncol(y_rep[[1]])
+      tmp = data.frame(
+        y = c(y,y_rep[[1]][1,],y_rep[[1]][2,],y_rep[[1]][3,],y_rep[[1]][4,],y_rep[[1]][5,],y_rep[[1]][6,],y_rep[[1]][7,],y_rep[[1]][8,]),
+        f = rep(c("y","yrep"),c(length(y),nn*8)),
+        c = rep(0:8,c(length(y),nn,nn,nn,nn,nn,nn,nn,nn))
+      )
+
+      ans = ggplot(tmp,aes(x=y,colour=f,group=c))+
+        geom_density()+
+        xlim(c(-sd(y)*3,sd(y)*3))+ylab("")+theme(legend.title = element_blank())
+    }
+
+  }
+
+  return(ans)
 }
