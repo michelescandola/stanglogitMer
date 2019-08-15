@@ -50,7 +50,7 @@ invglogit = function(y, a, k, g, s)  return ((-1/g)*log(((k-a)/(y-a))-1)+s)
 #' @return an "summary.stanglogitFit" object
 #' @export
 
-summary.stanglogitFit = function(object){
+summary.stanglogitFit = function(object,waic=FALSE){
   mypaste = function(k){
     out = paste(k[1],k[2])
     if(length(k)>2)
@@ -71,17 +71,16 @@ summary.stanglogitFit = function(object){
 
   sum.gbeta = testProblem(summary(object[[2]],pars="growth"))
   sum.sbeta = testProblem(summary(object[[2]],pars="shift"))
-  # sum.gsd   = testProblem(summary(object[[2]],pars="sigma_g"))
-  # sum.ssd   = testProblem(summary(object[[2]],pars="sigma_s"))
-  # sum.esd   = testProblem(summary(object[[2]],pars="sigma_e"))
-  sum.rand  = testProblem(summary(object[[2]],pars="sigma_u"))
-  sum.rcor  = testProblem(summary(object[[2]],pars="Cor_1"))
+  sum.rand  = NA
+  try(sum.rand<-testProblem(summary(object[[2]],pars="sigma_u")),TRUE)
+  sum.rcor  = NA
+  try(sum.rcor<-testProblem(summary(object[[2]],pars="Cor_1")),TRUE)
 
   dep.name = object[[9]]
 
   out_waic = NULL
 
-  if (requireNamespace("loo", quietly = TRUE)) {
+  if (requireNamespace("loo", quietly = TRUE)&&waic) {
     out_waic = loo::waic(extract_log_lik(object[[2]]))
   }
 
@@ -91,10 +90,7 @@ summary.stanglogitFit = function(object){
       "Formula Shift FE"  = paste(dep.name,mypaste(object[[5]])),
       "RE" = as.character(object[[6]]),
       "Growth parameters" = sum.gbeta,
-      # "Growth variances"  = sum.gsd,
       "Shift parameters"  = sum.sbeta,
-      # "Shift variances"   = sum.ssd,
-      # "Error parameter"   = sum.esd,
       "Random parameters" = sum.rand,
       "Random cor"        = sum.rcor,
       "WAIC"              = out_waic,
@@ -110,16 +106,15 @@ print.summary.stanglogitFit = function(object,digits=4){
 
   cat("\n\nBAYESIAN GENERALISED LOGIT MULTILEVEL MODEL\n\n")
 
-  cat("\n\n    WAIC: \n")
+  if(!is.null(object$`WAIC`)){
+    cat("\n\n    WAIC: \n")
 
-  print(object$`WAIC`)
+    print(object$`WAIC`)
+  }
 
   cat("\n\n   Asymptoms found by: ", object$`Asymptoms formula`,"\n\n")
 
   cat("\n\nFIXED EFFECTS OR POPULATION-LEVEL EFFECTS\n\n")
-
-  # cat("   Sigma: \n\n")
-  # print(object$`Error parameter`$summary,digits=digits)
 
   cat("\n\n   Formula for growth parameters: ", object$`Formula Growth FE`,"\n\n")
 
@@ -131,32 +126,39 @@ print.summary.stanglogitFit = function(object,digits=4){
   cat("   Shift parameters:\n\n")
   print(object$`Shift parameters`$summary,digits=digits)
 
-  cat("\n\nRANDOM EFFECTS OR GROUP-LEVEL EFFECTS\n\n")
+  if(!is.na(object$`RE`[1])){
+    cat("\n\nRANDOM EFFECTS OR GROUP-LEVEL EFFECTS\n\n")
 
-  cat("   Formula for random parameters: ", object$`RE`,"\n\n")
+    cat("   Formula for random parameters: ", object$`RE`,"\n\n")
 
-  cat("   Estimates of variances\n\n")
-  print(object$`Random parameters`$summary,digits=digits)
-  cat("\n\n   Correlations\n\n")
-  tmp = object$`Random cor`$summary
-  tmp2= tmp[!is.nan(tmp[,"Rhat"]),]
-  tmp3= strsplit(rownames(tmp2),",")
-  tmp4= matrix(unlist(lapply(tmp3,function(x){gsub(pattern="Cor_1",replace="",x,ignore.case = TRUE)})),ncol=2,byrow=TRUE)
-  tmp4= gsub(pattern="[^0-9///' ]",replace="",tmp4)
+    cat("   Estimates of variances\n\n")
+    print(object$`Random parameters`$summary,digits=digits)
 
-  tmp5 = t(apply(tmp4,1,function(x){x[order(x)]}))
-  tmp6 = apply(tmp5,1,function(x){paste(x[1],x[2],sep="-")})
-  sel = NULL
-  for(i in 1:(length(tmp6)-1)){
-    for(j in (i+1):length(tmp6)){
-      if(tmp6[i]==tmp6[j]) sel = c(sel,j)
+    if(!is.na(object$`Random cor`[1])){
+      cat("\n\n   Correlations\n\n")
+      tmp = object$`Random cor`$summary
+      tmp2= tmp[!is.nan(tmp[,"Rhat"]),]
+      tmp3= strsplit(rownames(tmp2),",")
+      tmp4= matrix(unlist(lapply(tmp3,function(x){gsub(pattern="Cor_1",replace="",x,ignore.case = TRUE)})),ncol=2,byrow=TRUE)
+      tmp4= gsub(pattern="[^0-9///' ]",replace="",tmp4)
+
+      tmp5 = t(apply(tmp4,1,function(x){x[order(x)]}))
+      tmp6 = apply(tmp5,1,function(x){paste(x[1],x[2],sep="-")})
+      sel = NULL
+      for(i in 1:(length(tmp6)-1)){
+        for(j in (i+1):length(tmp6)){
+          if(tmp6[i]==tmp6[j]) sel = c(sel,j)
+        }
+      }
+
+
+      sel = c(sel,which(tmp4[,1]==tmp4[,2]))
+
+      print(tmp2[-sel,],digits = digits)
     }
+
   }
 
-
-  sel = c(sel,which(tmp4[,1]==tmp4[,2]))
-
-  print(tmp2[-sel,],digits = digits)
 }
 
 print.stanglogitFit = function(x){

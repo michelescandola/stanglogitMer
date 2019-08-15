@@ -61,16 +61,6 @@ plot_sigmoid = function(object,CI=0.95){
 
   tmp0$divide = paste("Growth:",as.character(tmp0$factgrowth),"\nShift:",as.character(tmp0$factshift))
 
-  # tmp0$y0 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s2)
-  # tmp0$y1 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s1)
-  # tmp0$y2 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s3)
-  # tmp0$y3 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s2)
-  # tmp0$y4 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s3)
-  # tmp0$y5 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s1)
-  # tmp0$y6 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s3)
-  # tmp0$y7 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s1)
-  # tmp0$y8 = glogit(x=tmp0$distance*10,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s2)
-
   tmp0$y0 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g2, s=tmp0$s2)
   tmp0$y1 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g1, s=tmp0$s1)
   tmp0$y2 = glogit(x=tmp0$distance,a=(tmp0$minimum),k=(tmp0$maximum),g=tmp0$g3, s=tmp0$s3)
@@ -187,15 +177,6 @@ plot_gaussian = function(object,CI=0.95){
 
   tmp0$divide = paste("Growth:",as.character(tmp0$factgrowth),"\nShift:",as.character(tmp0$factshift))
 
-  # tmp0$y0 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g2, mean=tmp0$s2)
-  # tmp0$y1 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g1, mean=tmp0$s1)
-  # tmp0$y2 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g3, mean=tmp0$s3)
-  # tmp0$y3 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g1, mean=tmp0$s2)
-  # tmp0$y4 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g1, mean=tmp0$s3)
-  # tmp0$y5 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g2, mean=tmp0$s1)
-  # tmp0$y6 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g2, mean=tmp0$s3)
-  # tmp0$y7 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g3, mean=tmp0$s1)
-  # tmp0$y8 = dnorm(x=tmp0$distance*10,sd=1/tmp0$g3, mean=tmp0$s2)
 
   tmp0$y0 = dnorm(x=tmp0$distance,sd=1/tmp0$g2, mean=tmp0$s2)
   tmp0$y1 = dnorm(x=tmp0$distance,sd=1/tmp0$g1, mean=tmp0$s1)
