@@ -28,19 +28,17 @@ plot_sigmoid = function(object,CI=0.95){
 
   dat = object[[1]]
 
-  forG= gsub("~","",x=as.character(object[[4]]))
-  forS= gsub("~","",x=as.character(object[[5]]))
+  forG= attr(terms(object[[4]]),"term.labels")
+  forS= attr(terms(object[[5]]),"term.labels")
 
   distance = object[[8]]
 
   maximum= unlist(as.data.frame(extract(object[[2]],c("maximum")))[1,])
   minimum= unlist(as.data.frame(extract(object[[2]],c("minimum")))[1,])
 
-  ag = unlist(strsplit(forG,"\\+"))[-1]
-  ag = trimws(ag[!grepl(":",ag)])
+  ag = trimws(forG[!grepl(":",forG)])
 
-  as = unlist(strsplit(forS,"\\+"))[-1]
-  as = trimws(as[!grepl(":",as)])
+  as = trimws(forS[!grepl(":",forS)])
 
   selG = colnames(dat)%in%ag
   selS = colnames(dat)%in%as
@@ -144,19 +142,17 @@ plot_gaussian = function(object,CI=0.95){
 
   dat = object[[1]]
 
-  forG= gsub("~","",x=as.character(object[[4]]))
-  forS= gsub("~","",x=as.character(object[[5]]))
+  forG= attr(terms(object[[4]]),"term.labels")
+  forS= attr(terms(object[[5]]),"term.labels")
 
   distance = object[[8]]
 
   maximum= unlist(as.data.frame(extract(object[[2]],c("maximum")))[1,])
   minimum= unlist(as.data.frame(extract(object[[2]],c("minimum")))[1,])
 
-  ag = unlist(strsplit(forG,"\\+"))[-1]
-  ag = trimws(ag[!grepl(":",ag)])
+  ag = trimws(forG[!grepl(":",forG)])
 
-  as = unlist(strsplit(forS,"\\+"))[-1]
-  as = trimws(as[!grepl(":",as)])
+  as = trimws(forS[!grepl(":",forS)])
 
   selG = colnames(dat)%in%ag
   selS = colnames(dat)%in%as
